@@ -1,0 +1,105 @@
+<table #dataTable id="mytable" *ngIf="postComment!==undefined">
+    <thead>
+        <h2><b>Newly Comments</b></h2>
+        <tr *ngFor=" let post of postComment">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <section class="comment-list">
+                            <!-- First Comment -->
+                            <article class="row">
+                                <div class="col-md-2 col-sm-2 hidden-xs">
+                                    <figure class="thumbnail">
+                                        <img class="img-responsive"
+                                            src="https://i.dlpng.com/static/png/4026586_preview.png" />
+                                        <figcaption class="text-center">{{post.currentUser}}</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-md-10 col-sm-10">
+                                    <div class="panel panel-default arrow left">
+                                        <div class="panel-body">
+                                            <header class="text-left">
+                                                <!-- <div class="comment-user"><i class="fa fa-user"></i>{{post.currentUser}}</div> -->
+                                                <label>Date: </label> <time class="comment-date"
+                                                    datetime="16-12-2014 01:05"><i
+                                                        class="fa fa-clock-o"></i>{{post.currentDate | date: 'dd/MM/yyyy'}}</time>
+                                                <br> <label>Time: </label> <time class="comment-date"
+                                                    datetime="16-12-2014 01:05"><i
+                                                        class="fa fa-clock-o">{{post.currentTime}} </i></time>
+
+                                            </header>
+                                            <div class="comment-post">
+
+                                                <label>Comment:</label>
+                                                <p>{{post.commentTxt}}</p>
+                                            </div>
+                                            <!-- <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                          -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+<table #dataTable id="mytable">
+    <thead>
+        <h2><b>Old Comments</b></h2>
+        <tr *ngFor=" let data of commentData">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <section class="comment-list">
+                            <!-- First Comment -->
+                            <article class="row">
+                                <div class="col-md-2 col-sm-2 hidden-xs">
+                                    <figure class="thumbnail">
+                                        <img class="img-responsive"
+                                            src="https://i.dlpng.com/static/png/4026586_preview.png" />
+                                        <figcaption class="text-center">{{data.username}}</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-md-10 col-sm-10">
+                                    <div class="panel panel-default arrow left">
+                                        <div class="panel-body">
+                                            <header class="text-left">
+                                                <div class="comment-user"><i class="fa fa-user"></i><label>User
+                                                        :</label> {{data.username}} </div>
+                                                <label>Date :</label> <time class="comment-date"
+                                                    datetime="16-12-2014 01:05"><i
+                                                        class="fa fa-clock-o"></i>{{data.createDate}}</time>
+                                                <br> <label>Time :</label><time class="comment-date"
+                                                    datetime="16-12-2014 01:05"><i
+                                                        class="fa fa-clock-o"></i>{{data.createdTime}}</time>
+
+                                            </header>
+                                            <div class="comment-post">
+                                                <label>Comment</label>
+                                                <p>{{data.comment}}</p>
+                                            </div>
+                                            <!-- <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                          -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </tr>
+    </thead>
+    <tbody> </tbody>
+</table>

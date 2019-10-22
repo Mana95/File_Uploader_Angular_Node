@@ -1,0 +1,105 @@
+<div class="container">
+        <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()">
+                <div class="form-group ">
+                        <h2>Select your files to add a job</h2>
+                        <input type="file" accept=".pdf" ng2FileSelect fromcontrolName="jobname" [uploader]="uploader"
+                            multiple /><br />
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                      <label>Job Name</label>
+                    <input type="text" class="form-control form-control-lg"   formControlName="jobname"placeholder="First name" [ngClass]="{ 'is-invalid': submitted && f.jobname.errors }">
+                    <div *ngIf="submitted && f.jobname.errors" class="invalid-feedback">
+                            <div *ngIf="f.jobname.errors.required">
+                                <b>Job Name is required</b>
+                            </div>
+                        </div> 
+                
+                
+                </div>
+                  <div class="col">
+                        <label>Assign User:</label>
+                        <select id="inputState" class="form-control form-control-lg" formControlName = "userDrop" (change)="getUserRole($event)">
+                            <option selected>--Selected--</option>
+                            <option *ngFor="let userrole of useRole">{{
+                    userrole.username
+                  }}</option>
+                        </select>
+                             
+                  </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                            <label for="exampleFormControlTextarea1">Description</label>
+                            <textarea class="form-control" id="description" formControlName = "jobDescription" rows="3"  [ngClass]="{ 'is-invalid': submitted && f.jobDescription.errors }" ></textarea>
+                            <div *ngIf="submitted && f.jobDescription.errors" class="invalid-feedback">
+                                    <div *ngIf="f.jobDescription.errors.required">
+                                        <b>Job Description is required</b>
+                                    </div>
+                                </div>     
+                    </div>
+                </div>
+                <h3>Upload queue</h3>
+                <p>Queue length: {{ uploader?.queue?.length }}</p>
+                <table class="table">
+                        <thead>
+                                <tr>
+                                    <th width="50%">Name</th>
+                                    <th>Size</th>
+                                    <th>Progress</th>
+                                    <!-- <th>Choose Template</th> -->
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr *ngFor="let item of uploader.queue">
+                                            <td>
+                                                <strong>{{ item?.file?.name }}</strong>
+                                            </td>
+                                            <td>{{ item?.file?.size / 1024 / 1024 | number: ".2" }} MB</td>
+                                            <td>
+                                                <div class="progress" style="margin-bottom: 0;">
+                                                    <div class="progress-bar" role="progressbar"
+                                                        [ngStyle]="{ width: item.progress + '%' }"></div>
+                                                </div>
+                                            </td>
+                                            <td nowrap>
+                                                    <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                                    </button>
+                                                </td>
+                                    </tr>
+                            </tbody>
+                </table>
+               
+                
+                                        <button type="submit" class="btn btn-success btn-s" >
+                                                <span class="glyphicon glyphicon-upload"></span> Upload all
+                                            </button>
+                                            &nbsp;
+                                            <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()"
+                                                [disabled]="!uploader.isUploading">
+                                                <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                                            </button>
+                                            &nbsp;
+                                            <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()"
+                                                [disabled]="!uploader.queue.length">
+                                                <span class="glyphicon glyphicon-trash"></span> Remove all
+                                            </button>
+
+                           
+                          
+
+            </form>                    
+</div>
+
+<!--
+ 
+
+
+
+
+    
+-->

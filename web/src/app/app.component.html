@@ -1,0 +1,80 @@
+<!-- nav -->
+<!-- <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/">Home</a>
+      <a class="nav-item nav-link" routerLink="/viewmode" *ngIf="isAdmin"><b>List Jobs</b></a>
+      
+      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav> -->
+<!-- <div class="topnav "  *ngIf="currentUser">
+  <a class="active glyphicon glyphicon-home"  routerLink="/">Home</a>
+  <a routerLink="/viewmode" *ngIf="isAdmin">List Jobs</a>
+
+  <div class="topnav-right">
+    <a  (click)="logout()">Logout</a>
+
+  </div>
+</div> -->
+
+
+
+
+
+<nav class = "navbar navbar-expand-md navbar-light bg-warning"  *ngIf="currentUser">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  <div class = "navbar-nav">
+
+      <li class="nav-item" >
+          <a class="navbar-brand" href="#">
+              <img src="../assets/3.png" width="50" height="30" class="d-inline-block align-top" alt="Papyrus_Logo">
+             <b>Papyrus</b></a>
+        </li>
+        <!-- <li class="nav-item" >
+        <a routerLink= "/" width="30" height="30"  class="nav-item nav-link"><b>Papyrus</b></a>
+      </li> -->
+
+    <li class="nav-item">
+        
+      <a routerLink="/"  width="30" height="30"  class="nav-item nav-link"><span class="glyphicon glyphicon-Home"></span><b>Home</b></a>  
+    </li>
+    <li class="nav-item">
+      <a class="nav-item nav-link" routerLink="/viewmode"   *ngIf="isAdmin"><span class="glyphicon glyphicon-Home"></span><b>List Jobs</b></a>
+    </li>
+    <li class="nav-item">
+ 
+        <a class="nav-item nav-link" routerLink="/Registration"   *ngIf="isAdmin"><span class="glyphicon glyphicon-Home"></span><b>Add User</b></a>
+      </li>
+      <!--Add a userview link 2019-09-11-->
+      <li class="nav-item">
+          <a class="nav-item nav-link" routerLink="/userview" *ngIf="isAdmin"><span class="glyphicon glyphicon-Home"></span><b>List Users</b></a>
+        </li>
+
+  </div>
+  <div class = "navbar-nav ml-auto">
+      <a class="navbar-brand"(click)="logout()" style= "color: black;">
+          <img src="/src/assets/images.png"  width="30" height="30" class="d-inline-block align-top" alt="">
+          <span class="glyphicon glyphicon-log-out"></span>  Logout
+        </a>
+      </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+<!-- main app container -->
+
+
+  
+              <router-outlet></router-outlet>
+     
+       <!-- <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">view table</a> -->

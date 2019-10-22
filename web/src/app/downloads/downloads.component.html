@@ -1,0 +1,151 @@
+
+<div class="row">
+  <div class="container">
+    <h1>
+      <b>Selected Job Downloads</b> &nbsp; &nbsp;
+      <div *ngFor="let data of downlods">
+      <button  type="button" class="btn btn-success" (click) = "refreshPage(data)" >
+        <span class="glyphicon glyphicon-repeat"></span> &nbsp;Refresh Page
+      </button>
+    </div>
+    </h1>
+<form [formGroup]="sendMailForm" (ngSubmit)="sendMail()">
+    <div class="col-md-5"> 
+  <input type="text" formControlName="email" placeholder="email" required=""
+        class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }"> 
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">emailname is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+      </div>  
+    </div>
+    <button  type="submit" class="btn btn-primary" *ngIf= "currentStatusemail == 'Completed'">
+        <span class="glyphicon glyphicon-envelope"></span> &nbsp; Send Mail</button>
+        <button  type="submit" class="btn btn-primary" *ngIf= "currentStatusemail !== 'Completed'">
+            <span class="glyphicon glyphicon-envelope"></span> &nbsp; Send Mail</button>
+      </form>
+ <br>
+    <!-- <p>Your role is: <strong>{{currentUser.role}}</strong>.</p> -->
+    <br />
+    
+    <table #dataTable class="table table-striped table-hover table-bordered" id="mytable">
+      <caption>
+        <b>View Table Details</b>
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col" style="text-align: center">Assign User</th>
+          <th scope="col" style="text-align: center">User</th>
+          <th scope="col" style="text-align: center">File Name</th>
+          <!-- <th scope="col" style="text-align: center">Converted Date</th>
+          <th scope="col" style="text-align: center">Converted Time</th> -->
+          <th scope="col" style="text-align: center">Choose Template</th>
+          <th scope="col" style="text-align: center">Status</th>
+          <th scope="col" style="text-align: center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- | paginate: { itemsPerPage: 10, currentPage: p } -->
+
+        <tr *ngFor="
+            let data of downlods
+              | paginate: { itemsPerPage: 10, currentPage: p }
+          ">
+          <td id="job_id" style="text-align: center" >{{data.assignUser}}</td>
+          <td>{{ data.username}}</td>
+          <td>{{ data.filename }}</td>
+
+          <td> <select *ngIf= "data.status == 'new' || data.status == 'Ready'" class="form-control form-control-lg" (change)= "changeTemplate($event, data)" id = "item" formconrolName = "item" >
+            <option>{{data.itemtemp}}</option>
+            <option value = "Call data" >Call data</option>
+            <option value = "Call and cell data" >Call and cell data</option>
+            <!-- <option value = "Template-03" >Template-03</option>
+            <option value = "Template-04" >Template-04</option> -->
+          </select>
+          <select *ngIf= "data.status == 'Completed'" class="form-control form-control-lg" disabled (change)= "changeTemplate($event, data)" id = "item" formconrolName = "item" >
+              <option>{{data.itemtemp}}</option>
+              <option value = "Call data" >Call data</option>
+              <option value = "Call and cell data" >Call and cell data</option>
+              <!-- <option value = "Template-03" >Template-03</option>
+              <option value = "Template-04" >Template-04</option> -->
+            </select>
+            <select *ngIf= "data.status == 'CompletedFail'" class="form-control form-control-lg" disabled (change)= "changeTemplate($event, data)" id = "item" formconrolName = "item" >
+                <option>{{data.itemtemp}}</option>
+                <option value = "Call data" >Call data</option>
+                <option value = "Call and cell data" >Call and cell data</option>
+                <!-- <option value = "Template-03" >Template-03</option>
+                <option value = "Template-04" >Template-04</option> -->
+              </select>
+              <select *ngIf= "data.status == 'Inprogress'" class="form-control form-control-lg" disabled (change)= "changeTemplate($event, data)" id = "item" formconrolName = "item" >
+                  <option>{{data.itemtemp}}</option>
+                  <option value = "Call data" >Call data</option>
+                  <option value = "Call and cell data" >Call and cell data</option>
+                  <!-- <option value = "Template-03" >Template-03</option>
+                  <option value = "Template-04" >Template-04</option> -->
+                </select>
+                <select *ngIf= "data.status == 'Pending'" class="form-control form-control-lg" disabled (change)= "changeTemplate($event, data)" id = "item" formconrolName = "item" >
+                    <option>{{data.itemtemp}}</option>
+                    <option value = "Call data" >Call data</option>
+                    <option value = "Call and cell data" >Call and cell data</option>
+                    <!-- <option value = "Template-03" >Template-03</option>
+                    <option value = "Template-04" >Template-04</option> -->
+                  </select>
+
+        </td>
+          <td>
+              <span *ngIf="'Completed' == data.status" class="glyphicon glyphicon-ok" style="color:lightgreen"
+                aria-hidden="true">{{ data.status}}</span>
+              <span *ngIf="'CompletedFail' == data.status" class="glyphicon glyphicon-remove" style="color:red"
+                aria-hidden="true">{{ data.status }}</span>
+              <span *ngIf="'Inprogress' == data.status" class="glyphicon glyphicon-refresh" style="color:blue"
+                aria-hidden="true">{{ data.status }}</span>
+              <span *ngIf="'Pending' == data.status" class="glyphicon glyphicon-time" style="color:Gold "
+                aria-hidden="true">{{ data.status }}</span>
+                <span *ngIf="'new' == data.status" class="glyphicon glyphicon-plus" style="color:purple "
+                aria-hidden="true">{{ data.status }}</span>
+                <span *ngIf="'Ready' == data.status" class=" glyphicon glyphicon-transfer" style="color:lightcoral "
+                aria-hidden="true">{{ data.status }}</span>  
+                             
+            </td>
+            
+          <td>
+            <button *ngIf= "'Completed'==data.status" type="button" class="btn btn-success btn-xs" (click)="download($event, data)">
+              <span class="glyphicon glyphicon-save"></span>Download
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+        <pagination-controls (pageChange)="p = $event" style="float:right;"></pagination-controls>
+
+                
+</div>
+
+
+        <div class="container">
+            <div class="card">
+                <div class="commentbox">
+                    <div class="col-12 col-sm-12 header">
+                        <h4>Add Comments here</h4>
+                    </div>
+                    <div class="col-12 col-sm-12 body">
+                        <div class="comment-container">
+                                <div class="comment-form">
+                                  <app-comment (usercomment)="receiveComment($event)"></app-comment>
+                                </div>
+                        </div>
+
+                        
+                       
+                    </div>
+                  </div>
+                  <app-reply-comments [postComment]="comments" (countComments)="recieveCount($event)"></app-reply-comments>
+              </div>
+        </div>
+
+                                   
+      
+
+
+
+
